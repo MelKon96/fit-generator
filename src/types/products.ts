@@ -14,7 +14,7 @@ export interface Product {
   isAvailable?: boolean;
   isVeggie: boolean;
   isDiabetesFriendly: boolean;
-  // Поля для будущих фич
+
   tags?: string[]; // например, ['без сахара', 'высокий белок']
 }
 

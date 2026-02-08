@@ -72,7 +72,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total })
                           // Комбинированная анимация: движение + цвет
                           animate={!showMap ? { 
                             y: [-1.5, 1.5, -1.5],
-                            color: ["#94a3b8", "#f97316", "#94a3b8"], // Slate-400 -> Orange-500 -> Slate-400
+                            color: ["#94a3b8", "#f97316", "#94a3b8"], 
                             borderColor: ["#e2e8f0", "#fdba74", "#e2e8f0"], // Свечение рамки
                           } : { 
                             y: 0,
@@ -81,7 +81,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total })
                           }}
                           transition={{ 
                             repeat: Infinity, 
-                            duration: 2.5, // Спокойный цикл
+                            duration: 2.5, 
                             ease: "easeInOut" 
                           }}
                           whileHover={{ scale: 1.05 }}
@@ -146,7 +146,6 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total })
                 </motion.form>
               )}
 
-              {/* Остальные шаги (processing/success) без изменений */}
               {step === "processing" && (
                 <motion.div key="processing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-20 text-center space-y-6">
                   <motion.div 

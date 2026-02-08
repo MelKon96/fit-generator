@@ -18,7 +18,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, userMacros, onAddTo
           key={product.id}
           {...product}
           userMacros={userMacros}
-          // Передаем функцию дальше в карточку
+
           onAddToCart={() => onAddToCart(product)}
         />
       ))}

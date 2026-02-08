@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Target, Activity, ArrowRight, Flame, Venus, Mars } from "lucide-react";
 import { calculateMacros, type CalculationResults } from "../utils/calculations";
@@ -54,9 +54,9 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
 
           {/* СЕКЦИЯ: ПАРАМЕТРЫ ТЕЛА */}
           <div className="grid grid-cols-3 gap-3">
-            <FormField label="Возраст" name="age" type="number" value={formData.age} onChange={handleChange} placeholder="25" />
-            <FormField label="Вес (кг)" name="weight" type="number" value={formData.weight} onChange={handleChange} placeholder="70" />
-            <FormField label="Рост (см)" name="height" type="number" value={formData.height} onChange={handleChange} placeholder="180" />
+            <FormField label="Возраст" name="age" type="number" value={formData.age} min="6" max="120" onChange={handleChange} placeholder="25" />
+            <FormField label="Вес (кг)" name="weight" type="number" value={formData.weight} min="30" max="200" onChange={handleChange} placeholder="70" />
+            <FormField label="Рост (см)" name="height" type="number" value={formData.height} min="110" max="260" onChange={handleChange} placeholder="180" />
           </div>
 
           {/* СЕКЦИЯ: АКТИВНОСТЬ */}
@@ -89,7 +89,6 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
           <button onClick={handleCalculate} className="w-full bg-slate-900 text-white py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] hover:bg-orange-600 transition-all shadow-xl flex items-center justify-center gap-3 active:scale-95">
             Рассчитать <ArrowRight size={20} />
           </button>
-          
         </>
       ) : (
         /* ЭКРАН РЕЗУЛЬТАТОВ */

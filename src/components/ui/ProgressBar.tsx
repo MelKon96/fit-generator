@@ -8,10 +8,10 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ label, current, target, color }) => {
-  // Вычисляем процент заполнения (но не более 100% для ширины полоски)
+
   const percentage = Math.min((current / target) * 100, 100);
   
-  // Вычисляем реальный процент для текста (может быть > 100%)
+ 
   const displayPercentage = ((current / target) * 100).toFixed(0);
 
   return (
