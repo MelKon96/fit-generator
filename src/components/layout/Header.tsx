@@ -31,10 +31,10 @@ const Header: React.FC<HeaderProps> = ({ searchQuery, setSearchQuery, filterVegg
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => setFilterVeggie(!filterVeggie)} className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${filterVeggie ? "bg-green-500 text-white shadow-md" : "bg-white text-slate-400 hover:bg-slate-50"}`}>
+            <button onClick={() => setFilterVeggie(!filterVeggie)} className={`flex hover:cursor-pointer items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${filterVeggie ? "bg-green-500 text-white shadow-md" : "bg-white text-slate-400 hover:bg-slate-50"}`}>
               {filterVeggie && <CheckCircle2 size={12} />} Вегетарианское
             </button>
-            <button onClick={() => setFilterDiabetes(!filterDiabetes)} className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${filterDiabetes ? "bg-blue-500 text-white shadow-md" : "bg-white text-slate-400 hover:bg-slate-50"}`}>
+            <button onClick={() => setFilterDiabetes(!filterDiabetes)} className={`flex hover:cursor-pointer items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${filterDiabetes ? "bg-blue-500 text-white shadow-md" : "bg-white text-slate-400 hover:bg-slate-50"}`}>
               {filterDiabetes && <CheckCircle2 size={12} />} Диабет-friendly
             </button>
           </div>
@@ -56,10 +56,10 @@ const Header: React.FC<HeaderProps> = ({ searchQuery, setSearchQuery, filterVegg
         </div>
       </div>
 
-      {/* Блок сортировки теперь здесь */}
+
       <div className="flex flex-wrap gap-2 pb-4 border-b border-slate-100">
         {(["proteins", "fats", "carbs", "calories", "price"] as SortField[]).map((field) => (
-          <button key={field} onClick={() => onSort(field)} className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${sortBy === field ? "bg-slate-900 text-white shadow-lg" : "bg-white text-slate-400 hover:bg-slate-50"}`}>
+          <button key={field} onClick={() => onSort(field)} className={`px-4 py-2 hover:cursor-pointer rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${sortBy === field ? "bg-slate-900 text-white shadow-lg" : "bg-white text-slate-400 hover:bg-slate-50"}`}>
             {field === "proteins" ? "Белки" : field === "fats" ? "Жиры" : field === "carbs" ? "Углеводы" : field === "calories" ? "Ккал" : "Цена"}
             {sortBy === field && (sortOrder === "asc" ? " ↑" : " ↓")}
           </button>

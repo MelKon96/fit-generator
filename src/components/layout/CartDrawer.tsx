@@ -4,7 +4,6 @@ import CartItem from "../ui/CartItem";
 import ProgressBar from "../ui/ProgressBar";
 import { getStatusColor, getStatusBg, getMacroColor } from "../../utils/uiHelpers";
 
-// Типы
 import type { Product } from "../../types/products";
 import type { CalculationResults } from "../../utils/calculations";
 import type { GeneratedDietItem } from "../../utils/dietGenerator";
@@ -21,7 +20,7 @@ interface CartDrawerProps {
   };
   userMacros: CalculationResults | null;
   onRemoveItem: (index: number) => void;
-  onCheckout: () => void; // <--- Проверь наличие этой строки!
+  onCheckout: () => void;
 }
 
 const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, cart, cartTotals, userMacros, onRemoveItem, onCheckout }) => {
@@ -32,13 +31,12 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, cart, cartTota
         <div className="p-8 h-full flex flex-col">
           {/* Заголовок */}
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-black text-slate-900">Ваша корзина</h2>
-            <button onClick={onClose} className="text-[10px] font-black uppercase text-slate-400 hover:text-slate-900 transition-colors">
+            <h2 className="text-2xl hover:cursor-default font-black text-slate-900">Ваша корзина</h2>
+            <button onClick={onClose} className="text-[10px] font-black hover:cursor-pointer uppercase text-slate-400 hover:text-slate-900 transition-colors">
               Закрыть
             </button>
           </div>
 
-          {/* Список товаров */}
           <div className="flex-1 overflow-y-auto mb-6 pr-2">{cart.length === 0 ? <div className="text-center py-20 text-slate-400 italic font-medium">Корзина пуста...</div> : cart.map((item, index) => <CartItem key={`${item.id}-${index}`} name={item.name} price={item.price} weight={(item as GeneratedDietItem).weight} onRemove={() => onRemoveItem(index)} />)}</div>
 
           {/* Прогресс нутриентов */}
@@ -50,7 +48,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, cart, cartTota
             </div>
           )}
 
-          {/* Футер корзины */}
           <div className="pt-6 border-t border-slate-100 mt-auto">
             <div className="flex justify-between items-end mb-6">
               <div>
@@ -59,7 +56,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, cart, cartTota
               </div>
               <p className="text-xs font-bold text-slate-400">Лимит: {userMacros?.calories || 0}</p>
             </div>
-            <button onClick={onCheckout} className={`w-full text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-xl transition-all duration-500 ${userMacros ? getStatusBg(cartTotals.calories, userMacros.calories) : "bg-slate-900"}`}>
+            <button onClick={onCheckout} className={`w-full hover:cursor-pointer text-white py-5 rounded-3xl font-black uppercase tracking-widest shadow-xl transition-all duration-500 ${userMacros ? getStatusBg(cartTotals.calories, userMacros.calories) : "bg-slate-900"}`}>
               Оформить заказ
             </button>
           </div>

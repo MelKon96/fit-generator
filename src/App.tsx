@@ -1,18 +1,15 @@
 import React, { useState, useMemo } from "react";
 
-// Инфраструктура
-import { MOCK_PRODUCTS } from "./data/products";
+import { useProducts } from "./hooks/useProducts";
 import { generateGeneticDiet } from "./utils/dietGenerator";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
-// Компоненты
 import Sidebar from "./components/layout/Sidebar";
 import Header from "./components/layout/Header";
 import CartDrawer from "./components/layout/CartDrawer";
 import CheckoutModal from "./components/CheckoutModal";
 import ProductGrid from "./components/ProductGrid";
 
-// Типы
 import type { Product, SortField, SortOrder } from "./types/products";
 import type { CalculationResults } from "./utils/calculations";
 import type { GeneratedDietItem, DietPlan } from "./utils/dietGenerator";
@@ -30,9 +27,10 @@ const App: React.FC = () => {
   const [filterVeggie, setFilterVeggie] = useState(false);
   const [filterDiabetes, setFilterDiabetes] = useState(false);
 
+  const { products, isLoading, isError } = useProducts();
   const handleMagicGenerate = () => {
     if (!userMacros) return alert("Сначала рассчитайте свои нормы!");
-    const result: DietPlan = generateGeneticDiet(userMacros, MOCK_PRODUCTS);
+    const result: DietPlan = generateGeneticDiet(userMacros, products);
     setCart(result.combo);
   };
 
@@ -46,16 +44,18 @@ const App: React.FC = () => {
   };
 
   const processedProducts = useMemo(() => {
-    return MOCK_PRODUCTS.filter((product) => {
-      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesVeggie = filterVeggie ? product.isVeggie : true;
-      const matchesDiabetes = filterDiabetes ? product.isDiabetesFriendly : true;
-      return matchesSearch && matchesVeggie && matchesDiabetes;
-    }).sort((a, b) => {
-      const factor = sortOrder === "asc" ? 1 : -1;
-      return ((a[sortBy] as number) - (b[sortBy] as number)) * factor;
-    });
-  }, [searchQuery, sortBy, sortOrder, filterVeggie, filterDiabetes]);
+    return products
+      .filter((product) => {
+        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesVeggie = filterVeggie ? product.isVeggie : true;
+        const matchesDiabetes = filterDiabetes ? product.isDiabetesFriendly : true;
+        return matchesSearch && matchesVeggie && matchesDiabetes;
+      })
+      .sort((a, b) => {
+        const factor = sortOrder === "asc" ? 1 : -1;
+        return ((a[sortBy] as number) - (b[sortBy] as number)) * factor;
+      });
+  }, [searchQuery, sortBy, sortOrder, filterVeggie, filterDiabetes, products]);
 
   const cartTotals = useMemo(() => {
     return cart.reduce(
@@ -71,6 +71,9 @@ const App: React.FC = () => {
       { calories: 0, proteins: 0, fats: 0, carbs: 0 },
     );
   }, [cart]);
+
+  if (isLoading) return <div>Загрузка...</div>;
+  if (isError) return <div>Ошибка загрузки данных</div>;
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row font-sans">

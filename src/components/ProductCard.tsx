@@ -18,7 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, calories, protei
   const isHighProtein = userMacros && proteins > 20;
 
   return (
-    <div className={`group relative bg-white rounded-[2rem] p-5 shadow-sm hover:shadow-xl transition-all duration-500 border flex flex-col h-full ${isHighProtein ? "border-orange-200 bg-orange-50/20" : "border-slate-100"}`}>
+    <div className={`group relative bg-white rounded-[2rem] p-5 shadow-sm hover:cursor-default hover:shadow-xl transition-all duration-500 border flex flex-col h-full ${isHighProtein ? "border-orange-200 bg-orange-50/20" : "border-slate-100"}`}>
 
       {isHighProtein && <CardBadge label="IDEAL FOR YOU" icon={Star} />}
 
@@ -42,7 +42,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, calories, protei
       <div className="flex items-center justify-between pt-4 border-t border-slate-50 mt-auto">
         <PriceBadge price={price} />
 
-        <button onClick={onAddToCart} className="bg-slate-900 hover:bg-orange-500 text-white p-3.5 rounded-2xl transition-all active:scale-90 shadow-lg shadow-slate-200 group/btn">
+        <button onClick={onAddToCart} className="bg-slate-900 hover:cursor-pointer hover:bg-orange-500 text-white p-3.5 rounded-2xl transition-all active:scale-90 shadow-lg shadow-slate-200 group/btn">
           <ShoppingCart size={20} className="group-hover/btn:rotate-12 transition-transform" />
         </button>
       </div>

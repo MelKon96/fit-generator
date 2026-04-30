@@ -14,10 +14,10 @@ const CartItem: React.FC<CartItemProps> = ({ name, price, weight = 100, onRemove
   const totalPrice = (price * weight) / 100;
 
   return (
-    <div className="group flex items-center justify-between p-4 mb-3 bg-slate-50 hover:bg-white border border-transparent hover:border-slate-200 rounded-2xl transition-all duration-300">
+    <div className="group flex hover:cursor-default items-center justify-between p-4 mb-3 bg-slate-50 hover:bg-white border border-transparent hover:border-slate-200 rounded-2xl transition-all duration-300">
       <div className="flex-1">
-        <h4 className="font-bold text-slate-900 group-hover:text-orange-600 transition-colors">
-          {name}
+        <h4 className="font-bold  text-slate-900 group-hover:text-orange-600 transition-colors">
+          {name} 
         </h4>
         
         <div className="flex items-center gap-4 mt-1">
@@ -38,7 +38,7 @@ const CartItem: React.FC<CartItemProps> = ({ name, price, weight = 100, onRemove
 
       <button
         onClick={onRemove}
-        className="p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all active:scale-90"
+        className="p-2 hover:cursor-pointer text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all active:scale-90"
         title="Удалить"
       >
         <Trash2 size={18} />

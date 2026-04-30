@@ -3,7 +3,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Target, Activity, ArrowRight, Flame, Venus, Mars } from "lucide-react";
 import { calculateMacros, type CalculationResults } from "../utils/calculations";
 
-// Импортируем наши "Атомы"
+
 import FormField from "./ui/FormField";
 import GenderButton from "./ui/GenderButton";
 import GoalButton from "./ui/GoalButton";
@@ -13,7 +13,7 @@ interface CalculatorFormProps {
 }
 
 const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
-  // Используем твой хук для сохранения данных полей формы
+
   const [formData, setFormData] = useLocalStorage("calculator_input_data", {
     gender: "male",
     age: "",
@@ -23,7 +23,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
     goal: "maintain",
   });
 
-  // Также можно обернуть результаты, чтобы при перезагрузке не возвращаться на экран ввода
+
   const [results, setResults] = useLocalStorage<CalculationResults | null>("calculator_results", null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -43,23 +43,22 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
     <div className="space-y-8 animate-in fade-in slide-in-from-left duration-700">
       {!results ? (
         <>
-          {/* СЕКЦИЯ: ПОЛ */}
+        
           <div className="space-y-3">
-            <label className="text-[10px] font-black uppercase text-slate-400 ml-1 tracking-widest">Ваш пол</label>
+            <label className="text-[10px] font-black uppercase text-slate-400 ml-1 tracking-widest" >Ваш пол</label>
             <div className="grid grid-cols-2 gap-3">
               <GenderButton label="Мужчина" icon={Mars} colorClass="text-blue-500" active={formData.gender === "male"} onClick={() => setFormData((p) => ({ ...p, gender: "male" }))} />
               <GenderButton label="Женщина" icon={Venus} colorClass="text-pink-500" active={formData.gender === "female"} onClick={() => setFormData((p) => ({ ...p, gender: "female" }))} />
             </div>
           </div>
 
-          {/* СЕКЦИЯ: ПАРАМЕТРЫ ТЕЛА */}
           <div className="grid grid-cols-3 gap-3">
             <FormField label="Возраст" name="age" type="number" value={formData.age} min="6" max="120" onChange={handleChange} placeholder="25" />
             <FormField label="Вес (кг)" name="weight" type="number" value={formData.weight} min="30" max="200" onChange={handleChange} placeholder="70" />
             <FormField label="Рост (см)" name="height" type="number" value={formData.height} min="110" max="260" onChange={handleChange} placeholder="180" />
           </div>
 
-          {/* СЕКЦИЯ: АКТИВНОСТЬ */}
+   
           <div className="space-y-2">
             <label className="text-[10px] font-black uppercase text-slate-400 ml-1">Активность</label>
             <div className="relative">
@@ -73,7 +72,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
             </div>
           </div>
 
-          {/* СЕКЦИЯ: ЦЕЛЬ */}
+ 
           <div className="space-y-3">
             <div className="flex items-center gap-2 ml-1">
               <Target className="text-orange-500" size={16} />
@@ -86,12 +85,12 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
             </div>
           </div>
 
-          <button onClick={handleCalculate} className="w-full bg-slate-900 text-white py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] hover:bg-orange-600 transition-all shadow-xl flex items-center justify-center gap-3 active:scale-95">
+          <button onClick={handleCalculate} className="w-full bg-slate-900 hover:cursor-pointer text-white py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] hover:bg-orange-600 transition-all shadow-xl flex items-center justify-center gap-3 active:scale-95">
             Рассчитать <ArrowRight size={20} />
           </button>
         </>
       ) : (
-        /* ЭКРАН РЕЗУЛЬТАТОВ */
+       
         <div className="space-y-6 animate-in zoom-in duration-500 text-center">
           <div className="bg-orange-500 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden">
             <Flame className="absolute -right-4 -top-4 w-32 h-32 text-white/10" />

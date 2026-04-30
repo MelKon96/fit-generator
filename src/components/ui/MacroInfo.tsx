@@ -4,7 +4,7 @@ interface MacroInfoProps {
   label: string;
   value: number;
   colorClass: string;
-  isHigh?: boolean; // Подсветка для целей пользователя
+  isHigh?: boolean; // Подсветка для целей юзера
 }
 
 const MacroInfo: React.FC<MacroInfoProps> = ({ label, value, colorClass, isHigh }) => (

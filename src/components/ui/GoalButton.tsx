@@ -10,7 +10,7 @@ const GoalButton: React.FC<GoalButtonProps> = ({ active, label, onClick }) => (
   <button
     type="button"
     onClick={onClick}
-    className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all duration-300 ${
+    className={`flex items-center justify-between hover:cursor-pointer p-4 rounded-2xl border-2 transition-all duration-300 ${
       active ? "border-orange-500 bg-orange-50/50" : "border-slate-50 hover:border-slate-200 bg-white"
     }`}
   >

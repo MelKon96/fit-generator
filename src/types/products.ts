@@ -1,21 +1,21 @@
-// Описываем категории для фильтрации
+//фильтрация п категориям
 type Category = "meat" | "vegetables" | "dairy" | "grains" | "fruits" | "fish" | "nuts";
 
 export interface Product {
   id: string;
   name: string;
   price: number;
-  calories: number; // на 100г
-  proteins: number; // на 100г
-  fats: number; // на 100г
-  carbs: number; // на 100г
+  calories: number; 
+  proteins: number; 
+  fats: number; 
+  carbs: number; 
   image: string;
   category?: Category;
   isAvailable?: boolean;
   isVeggie: boolean;
   isDiabetesFriendly: boolean;
 
-  tags?: string[]; // например, ['без сахара', 'высокий белок']
+  tags?: string[]; // ['без сахара']
 }
 
 //? Типы для поиска товаров

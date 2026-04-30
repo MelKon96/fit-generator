@@ -1,7 +1,7 @@
 import type { Product } from "../types/products";
 
 export const MOCK_PRODUCTS: Product[] = [
-  // --- MEAT ---
+
   {
     id: "1",
     name: "Куриное филе",
@@ -31,7 +31,7 @@ export const MOCK_PRODUCTS: Product[] = [
     tags: ["сытно"],
   },
 
-  // --- FISH ---
+
   {
     id: "3",
     name: "Стейк лосося",
@@ -60,7 +60,7 @@ export const MOCK_PRODUCTS: Product[] = [
     image: "https://images.unsplash.com/photo-1664288377740-1bec924cd622?q=80&w=400",
   },
 
-  // --- VEGETABLES ---
+
   {
     id: "5",
     name: "Брокколи свежая",
@@ -101,7 +101,7 @@ export const MOCK_PRODUCTS: Product[] = [
     image: "https://images.unsplash.com/photo-1570543375343-63fe3d67761b?auto=format&fit=crop&w=400&q=80",
   },
 
-  // --- GRAINS ---
+
   {
     id: "8",
     name: "Гречка зеленая",
@@ -129,7 +129,7 @@ export const MOCK_PRODUCTS: Product[] = [
     image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=400",
   },
 
-  // --- DAIRY ---
+
   {
     id: "10",
     name: "Творог 5%",
@@ -170,7 +170,7 @@ export const MOCK_PRODUCTS: Product[] = [
     image: "https://plus.unsplash.com/premium_photo-1676686125407-227f3d352df8?auto=format&fit=crop&w=400&q=80",
   },
 
-  // --- FRUITS ---
+
   {
     id: "13",
     name: "Голубика",
@@ -198,7 +198,7 @@ export const MOCK_PRODUCTS: Product[] = [
     image: "https://images.unsplash.com/photo-1678942946279-c83e37f32304?q=80&w=400",
   },
 
-  // --- NUTS ---
+
   {
     id: "15",
     name: "Миндаль",
