@@ -9,6 +9,7 @@ interface CheckoutModalProps {
 }
 
 const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total }) => {
+  
   const [step, setStep] = useState<"info" | "processing" | "success">("info");
   const [address, setAddress] = useState("");
 

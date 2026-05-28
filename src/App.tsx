@@ -9,6 +9,7 @@ import Header from "./components/layout/Header";
 import CartDrawer from "./components/layout/CartDrawer";
 import CheckoutModal from "./components/CheckoutModal";
 import ProductGrid from "./components/ProductGrid";
+import AuthModal from "./components/AuthModal";
 
 import type { Product, SortField, SortOrder } from "./types/products";
 import type { CalculationResults } from "./utils/calculations";
@@ -27,7 +28,12 @@ const App: React.FC = () => {
   const [filterVeggie, setFilterVeggie] = useState(false);
   const [filterDiabetes, setFilterDiabetes] = useState(false);
 
+  // Аутентификация
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [user, setUser] = useState<string | null>(null);
+
   const { products, isLoading, isError } = useProducts();
+
   const handleMagicGenerate = () => {
     if (!userMacros) return alert("Сначала рассчитайте свои нормы!");
     const result: DietPlan = generateGeneticDiet(userMacros, products);
@@ -72,6 +78,7 @@ const App: React.FC = () => {
     );
   }, [cart]);
 
+  //**Поменять на изображения */
   if (isLoading) return <div>Загрузка...</div>;
   if (isError) return <div>Ошибка загрузки данных</div>;
 
@@ -86,7 +93,7 @@ const App: React.FC = () => {
       />
 
       <main className="flex-1 p-4 lg:p-12">
-        <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} filterVeggie={filterVeggie} setFilterVeggie={setFilterVeggie} filterDiabetes={filterDiabetes} setFilterDiabetes={setFilterDiabetes} userMacros={userMacros} cartCalories={cartTotals.calories} cartLength={cart.length} onOpenCart={() => setIsCartOpen(true)} sortBy={sortBy} sortOrder={sortOrder} onSort={handleSort} />
+        <Header searchQuery={searchQuery} onLogout={() => setUser(null)} user={user} onOpenLogin={() => setIsLoginOpen(true)} setSearchQuery={setSearchQuery} filterVeggie={filterVeggie} setFilterVeggie={setFilterVeggie} filterDiabetes={filterDiabetes} setFilterDiabetes={setFilterDiabetes} userMacros={userMacros} cartCalories={cartTotals.calories} cartLength={cart.length} onOpenCart={() => setIsCartOpen(true)} sortBy={sortBy} sortOrder={sortOrder} onSort={handleSort} />
         <ProductGrid products={processedProducts} userMacros={userMacros} onAddToCart={(p) => setCart([...cart, { ...p, weight: 100 }])} />
       </main>
 
@@ -104,6 +111,7 @@ const App: React.FC = () => {
       />
 
       <CheckoutModal isOpen={isCheckoutOpen} onClose={() => setIsCheckoutOpen(false)} total={cartTotals.calories * 0.45} />
+      <AuthModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} onLogin={(email) => setUser(email)} />
     </div>
   );
 };

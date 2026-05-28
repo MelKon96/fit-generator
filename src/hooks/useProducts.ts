@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
-import type { Product } from "../types/products";
+import { MOCK_PRODUCTS } from "../data/products";
 
 export const useProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    fetch("http://64.227.16.230:3001/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsError(true);
-        setIsLoading(false);
-      });
-  }, []);
-
-  return { products, isLoading, isError };
+  return { 
+    products: MOCK_PRODUCTS, 
+    isLoading: false, 
+    isError: false 
+  };
 };
