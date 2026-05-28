@@ -14,6 +14,8 @@ import AuthModal from "./components/AuthModal";
 import type { Product, SortField, SortOrder } from "./types/products";
 import type { CalculationResults } from "./utils/calculations";
 import type { GeneratedDietItem, DietPlan } from "./utils/dietGenerator";
+import Spinner from "./components/ui/Spinner";
+import ErrorScreen from "./components/ui/ErrorScreen";
 
 const App: React.FC = () => {
   const [userMacros, setUserMacros] = useLocalStorage<CalculationResults | null>("user_macros", null);
@@ -78,9 +80,8 @@ const App: React.FC = () => {
     );
   }, [cart]);
 
-  //**Поменять на изображения */
-  if (isLoading) return <div>Загрузка...</div>;
-  if (isError) return <div>Ошибка загрузки данных</div>;
+  if (isLoading) return <Spinner />;
+  if (isError) return <ErrorScreen />;
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row font-sans">
