@@ -9,7 +9,6 @@ interface CheckoutModalProps {
 }
 
 const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total }) => {
-  
   const [step, setStep] = useState<"info" | "processing" | "success">("info");
   const [address, setAddress] = useState("");
 
@@ -50,7 +49,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total })
                 <motion.form key="info" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} onSubmit={handleSubmit} className="space-y-6">
                   <div className="flex justify-between items-center">
                     <h2 className="text-2xl font-black text-slate-900 tracking-tight">Оформление</h2>
-                    <button type="button" onClick={handleClose} className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400">
+                    <button type="button" onClick={handleClose} className="p-2 hover:bg-slate-100 cursor-pointer rounded-full transition-colors text-slate-400">
                       <X size={20} />
                     </button>
                   </div>
@@ -102,7 +101,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total })
                     </div>
                   </div>
 
-                  <button type="submit" className="w-full bg-orange-500 text-white py-5 rounded-3xl font-black uppercase tracking-widest hover:bg-orange-600 shadow-lg active:scale-95 transition-all text-sm">
+                  <button type="submit" className="w-full bg-orange-500 cursor-pointer  text-white py-5 rounded-3xl font-black uppercase tracking-widest hover:bg-orange-600 shadow-lg active:scale-95 transition-all text-sm">
                     Заплатить {total.toFixed(0)} ₽
                   </button>
                 </motion.form>
@@ -121,7 +120,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total })
                     <CheckCircle size={48} className="text-white" />
                   </div>
                   <h2 className="text-3xl font-black text-slate-900">Успешно!</h2>
-                  <button onClick={handleClose} className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black uppercase text-xs tracking-widest">
+                  <button onClick={handleClose} className="w-full py-4 bg-slate-900  cursor-pointer text-white rounded-2xl font-black uppercase text-xs tracking-widest">
                     Вернуться
                   </button>
                 </motion.div>

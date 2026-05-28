@@ -10,6 +10,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onCalculate, onMagicGenerate }) => {
   return (
+    // lg:overflow-y-auto - Доп скролл
     <aside className="w-full lg:w-[400px] bg-white border-r border-slate-100  p-8 lg:h-screen lg:overflow-y-auto lg:sticky lg:top-0 z-20 shadow-xl lg:shadow-none">
       {/* Логотип и Брендинг */}
       <div className="flex items-center gap-3 mb-10">
