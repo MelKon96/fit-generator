@@ -1,4 +1,3 @@
-import React from "react";
 import { Search, ShoppingBag, CheckCircle2, LogIn } from "lucide-react";
 import { getStatusColor } from "../../utils/uiHelpers";
 import type { CalculationResults } from "../../utils/calculations";
@@ -23,7 +22,7 @@ interface HeaderProps {
   onLogout: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ searchQuery, user, onOpenLogin, onLogout, setSearchQuery, filterVeggie, setFilterVeggie, filterDiabetes, setFilterDiabetes, userMacros, cartCalories, cartLength, onOpenCart, sortBy, sortOrder, onSort }) => {
+const Header = ({ searchQuery, user, onOpenLogin, onLogout, setSearchQuery, filterVeggie, setFilterVeggie, filterDiabetes, setFilterDiabetes, userMacros, cartCalories, cartLength, onOpenCart, sortBy, sortOrder, onSort }: HeaderProps) => {
   return (
     <header className="flex flex-col gap-8 mb-12">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6">

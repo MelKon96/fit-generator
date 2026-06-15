@@ -3,7 +3,6 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Target, Activity, ArrowRight, Flame, Venus, Mars } from "lucide-react";
 import { calculateMacros, type CalculationResults } from "../utils/calculations";
 
-
 import FormField from "./ui/FormField";
 import GenderButton from "./ui/GenderButton";
 import GoalButton from "./ui/GoalButton";
@@ -12,9 +11,17 @@ interface CalculatorFormProps {
   onCalculate: (results: CalculationResults) => void;
 }
 
-const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
+interface FormState {
+  gender: "male" | "female";
+  age: string;
+  weight: string;
+  height: string;
+  activity: string;
+  goal: "lose" | "maintain" | "gain";
+}
 
-  const [formData, setFormData] = useLocalStorage("calculator_input_data", {
+const CalculatorForm = ({ onCalculate }: CalculatorFormProps) => {
+  const [formData, setFormData] = useLocalStorage<FormState>("calculator_input_data", {
     gender: "male",
     age: "",
     weight: "",
@@ -22,7 +29,6 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
     activity: "1.2",
     goal: "maintain",
   });
-
 
   const [results, setResults] = useLocalStorage<CalculationResults | null>("calculator_results", null);
 
@@ -43,9 +49,8 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
     <div className="space-y-8 animate-in fade-in slide-in-from-left duration-700">
       {!results ? (
         <>
-        
           <div className="space-y-3">
-            <label className="text-[10px] font-black uppercase text-slate-400 ml-1 tracking-widest" >Ваш пол</label>
+            <label className="text-[10px] font-black uppercase text-slate-400 ml-1 tracking-widest">Ваш пол</label>
             <div className="grid grid-cols-2 gap-3">
               <GenderButton label="Мужчина" icon={Mars} colorClass="text-blue-500" active={formData.gender === "male"} onClick={() => setFormData((p) => ({ ...p, gender: "male" }))} />
               <GenderButton label="Женщина" icon={Venus} colorClass="text-pink-500" active={formData.gender === "female"} onClick={() => setFormData((p) => ({ ...p, gender: "female" }))} />
@@ -58,7 +63,6 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
             <FormField label="Рост (см)" name="height" type="number" value={formData.height} min="110" max="260" onChange={handleChange} placeholder="180" />
           </div>
 
-   
           <div className="space-y-2">
             <label className="text-[10px] font-black uppercase text-slate-400 ml-1">Активность</label>
             <div className="relative">
@@ -72,7 +76,6 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
             </div>
           </div>
 
- 
           <div className="space-y-3">
             <div className="flex items-center gap-2 ml-1">
               <Target className="text-orange-500" size={16} />
@@ -90,7 +93,6 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
           </button>
         </>
       ) : (
-       
         <div className="space-y-6 animate-in zoom-in duration-500 text-center">
           <div className="bg-orange-500 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden">
             <Flame className="absolute -right-4 -top-4 w-32 h-32 text-white/10" />
@@ -98,7 +100,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
             <h2 className="text-6xl font-black">{results.calories}</h2>
             <p className="font-bold opacity-80 mt-1 uppercase text-xs">ккал / день</p>
           </div>
-          <button onClick={() => setResults(null)} className="w-full py-4 text-slate-400 font-bold hover:text-orange-500 transition-colors text-sm">
+          <button onClick={() => setResults(null)} className="w-full py-4 cursor-pointer text-slate-400 font-bold hover:text-orange-500 transition-colors text-sm">
             ← Назад к расчету
           </button>
         </div>

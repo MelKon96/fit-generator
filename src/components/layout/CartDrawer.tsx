@@ -1,4 +1,3 @@
-import React from "react";
 import Overlay from "../ui/Overlay";
 import CartItem from "../ui/CartItem";
 import ProgressBar from "../ui/ProgressBar";
@@ -23,7 +22,7 @@ interface CartDrawerProps {
   onCheckout: () => void;
 }
 
-const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, cart, cartTotals, userMacros, onRemoveItem, onCheckout }) => {
+const CartDrawer= ({ isOpen, onClose, cart, cartTotals, userMacros, onRemoveItem, onCheckout }:CartDrawerProps) => {
   return (
     <>
       <Overlay isOpen={isOpen} onClick={onClose} />

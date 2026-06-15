@@ -1,24 +1,27 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 
-import { useProducts } from "./hooks/useProducts";
 import { generateGeneticDiet } from "./utils/dietGenerator";
+import { useProducts } from "./hooks/useProducts";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { useAuth } from "./hooks/useAuth";
+import { useDebounce } from "./hooks/useDebounce";
 
 import Sidebar from "./components/layout/Sidebar";
 import Header from "./components/layout/Header";
 import CartDrawer from "./components/layout/CartDrawer";
+
 import CheckoutModal from "./components/CheckoutModal";
 import ProductGrid from "./components/ProductGrid";
 import AuthModal from "./components/AuthModal";
 
+import Spinner from "./components/ui/Spinner";
+import ErrorScreen from "./components/ui/ErrorScreen";
+
 import type { Product, SortField, SortOrder } from "./types/products";
 import type { CalculationResults } from "./utils/calculations";
 import type { GeneratedDietItem, DietPlan } from "./utils/dietGenerator";
-import Spinner from "./components/ui/Spinner";
-import ErrorScreen from "./components/ui/ErrorScreen";
-import { useAuth } from "./hooks/useAuth";
 
-const App: React.FC = () => {
+const App = () => {
   const [userMacros, setUserMacros] = useLocalStorage<CalculationResults | null>("user_macros", null);
   const [cart, setCart] = useLocalStorage<(Product | GeneratedDietItem)[]>("fitfuel_cart", []);
 
@@ -26,6 +29,8 @@ const App: React.FC = () => {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+
   const [sortBy, setSortBy] = useState<SortField>("calories");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [filterVeggie, setFilterVeggie] = useState(false);
@@ -53,16 +58,16 @@ const App: React.FC = () => {
   const processedProducts = useMemo(() => {
     return products
       .filter((product) => {
-        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesSearch = product.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
         const matchesVeggie = filterVeggie ? product.isVeggie : true;
         const matchesDiabetes = filterDiabetes ? product.isDiabetesFriendly : true;
         return matchesSearch && matchesVeggie && matchesDiabetes;
       })
       .sort((a, b) => {
         const factor = sortOrder === "asc" ? 1 : -1;
-        return ((a[sortBy] as number) - (b[sortBy] as number)) * factor;
+        return ((a[sortBy]) - (b[sortBy])) * factor;
       });
-  }, [searchQuery, sortBy, sortOrder, filterVeggie, filterDiabetes, products]);
+  }, [debouncedSearchQuery, sortBy, sortOrder, filterVeggie, filterDiabetes, products]);
 
   const cartTotals = useMemo(() => {
     return cart.reduce(

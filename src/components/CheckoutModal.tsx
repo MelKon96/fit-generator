@@ -8,7 +8,7 @@ interface CheckoutModalProps {
   total: number;
 }
 
-const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total }) => {
+const CheckoutModal = ({ isOpen, onClose, total }: CheckoutModalProps) => {
   const [step, setStep] = useState<"info" | "processing" | "success">("info");
   const [address, setAddress] = useState("");
 
@@ -31,7 +31,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, total })
     }, 500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setStep("processing");
     setTimeout(() => setStep("success"), 3500);

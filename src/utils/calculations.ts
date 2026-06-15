@@ -5,8 +5,12 @@ export interface CalculationResults {
   carbs: number;
 }
 
+type Gender = "male" | "female";
+
+type Goal = "lose" | "maintain" | "gain";
+
 // 2. Экспортируем саму функцию расчета
-export const calculateMacros = (age: number, weight: number, height: number, activity: string, goal: string, gender: string): CalculationResults => {
+export const calculateMacros = (age: number, weight: number, height: number, activity: string, goal: Goal, gender: Gender): CalculationResults => {
   // Базовая часть формулы Миффлина — Сан Жеора
   const baseBmr = 10 * weight + 6.25 * height - 5 * age;
 

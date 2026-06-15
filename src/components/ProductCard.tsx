@@ -1,8 +1,6 @@
-import React from "react";
 import { ShoppingCart, Star } from "lucide-react";
 import type { Product } from "../types/products";
 import type { CalculationResults } from "../utils/calculations";
-
 
 import MacroInfo from "./ui/MacroInfo";
 import PriceBadge from "./ui/PriceBadge";
@@ -13,17 +11,14 @@ interface ProductCardProps extends Product {
   onAddToCart: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ name, price, calories, proteins, fats, carbs, image, userMacros, onAddToCart }) => {
-
+const ProductCard = ({ name, price, calories, proteins, fats, carbs, image, userMacros, onAddToCart }: ProductCardProps) => {
   const isHighProtein = userMacros && proteins > 20;
 
   return (
     <div className={`group relative bg-white rounded-[2rem] p-5 shadow-sm hover:cursor-default hover:shadow-xl transition-all duration-500 border flex flex-col h-full ${isHighProtein ? "border-orange-200 bg-orange-50/20" : "border-slate-100"}`}>
-
       {isHighProtein && <CardBadge label="IDEAL FOR YOU" icon={Star} />}
 
-
-      <div className="relative h-44 w-full overflow-hidden rounded-[1.5rem] bg-slate-50 mb-5">
+      <div className="relative h-44 w-full cursor-pointer overflow-hidden rounded-[1.5rem] bg-slate-50 mb-5">
         <img src={image} alt={name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black text-slate-700 shadow-sm border border-white/50 uppercase">{calories} ккал</div>
       </div>
@@ -37,7 +32,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, calories, protei
           <MacroInfo label="Углев." value={carbs} colorClass="text-blue-600" />
         </div>
       </div>
-
 
       <div className="flex items-center justify-between pt-4 border-t border-slate-50 mt-auto">
         <PriceBadge price={price} />

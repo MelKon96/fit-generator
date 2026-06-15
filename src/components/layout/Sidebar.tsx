@@ -1,4 +1,3 @@
-import React from "react";
 import { Zap } from "lucide-react";
 import CalculatorForm from "../CalculatorForm";
 import type { CalculationResults } from "../../utils/calculations";
@@ -8,7 +7,7 @@ interface SidebarProps {
   onMagicGenerate: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onCalculate, onMagicGenerate }) => {
+const Sidebar = ({ onCalculate, onMagicGenerate }: SidebarProps) => {
   return (
     // lg:overflow-y-auto - Доп скролл
     <aside className="w-full lg:w-[400px] bg-white border-r border-slate-100  p-8 lg:h-screen lg:overflow-y-auto lg:sticky lg:top-0 z-20 shadow-xl lg:shadow-none">

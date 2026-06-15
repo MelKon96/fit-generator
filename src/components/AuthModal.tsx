@@ -13,7 +13,7 @@ const AuthModal = ({ isOpen, onClose, onLogin }: AuthModalProps) => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: false, password: false });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setErrors({ email: !email, password: !password });
     if (email && password) {

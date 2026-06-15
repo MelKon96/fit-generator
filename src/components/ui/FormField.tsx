@@ -1,10 +1,8 @@
-import React from "react";
-
 interface FormFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
-const FormField: React.FC<FormFieldProps> = ({ label, ...props }) => {
+const FormField = ({ label, ...props }: FormFieldProps) => {
   return (
     <div className="space-y-2 text-center">
       <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">{label}</label>

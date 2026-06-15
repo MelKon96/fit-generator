@@ -1,4 +1,3 @@
-import React from "react";
 
 interface ProgressBarProps {
   label: string;
@@ -7,7 +6,7 @@ interface ProgressBarProps {
   color: string;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ label, current, target, color }) => {
+const ProgressBar = ({ label, current, target, color }:ProgressBarProps) => {
   const percentage = Math.min((current / target) * 100, 100);
 
   const displayPercentage = ((current / target) * 100).toFixed(0);
